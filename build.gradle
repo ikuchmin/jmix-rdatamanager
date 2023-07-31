@@ -24,6 +24,8 @@ subprojects {
 
     dependencies {
         implementation 'io.projectreactor:reactor-core'
+        implementation 'org.postgresql:postgresql'
+
     }
 
     jmix {

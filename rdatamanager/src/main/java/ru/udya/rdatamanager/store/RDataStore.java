@@ -1,5 +1,6 @@
-package ru.udya.rdatamanager;
+package ru.udya.rdatamanager.store;
 
+import io.jmix.core.DataStore;
 import io.jmix.core.LoadContext;
 import io.jmix.core.SaveContext;
 import io.jmix.core.ValueLoadContext;
@@ -7,9 +8,6 @@ import io.jmix.core.entity.KeyValueEntity;
 import org.springframework.lang.Nullable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
-import java.util.Set;
 
 public interface RDataStore {
 
@@ -28,7 +26,6 @@ public interface RDataStore {
      *
      * @return the loaded object, or null if not found
      */
-    @Nullable
     Mono<Object> load(LoadContext<?> context);
 
     /**
@@ -58,7 +55,7 @@ public interface RDataStore {
      * @param context defines a query for scalar values and a list of keys for returned KeyValueEntity
      * @return list of KeyValueEntity instances
      */
-    Mono<KeyValueEntity> loadValues(ValueLoadContext context);
+    Flux<KeyValueEntity> loadValues(ValueLoadContext context);
 
     /**
      * Returns the number of key-value pairs for the given query passed in the {@link ValueLoadContext}.
@@ -67,4 +64,15 @@ public interface RDataStore {
      * @return number of key-value pairs in the data store
      */
     Mono<Long> getCount(ValueLoadContext context);
+
+    /**
+     * Using for cases when reactive store just a wrapper on
+     * casual store
+     * <p>
+     * Do not implement this method if implementation isn't interested
+     * in delegate
+     *
+     * @param dataStore
+     */
+    void wrapDelegate(DataStore dataStore);
 }

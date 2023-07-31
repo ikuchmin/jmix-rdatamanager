@@ -1,18 +1,17 @@
-package ru.udya.rdatamanager;
+package ru.udya.rdatamanager.dm;
 
-import io.jmix.core.EntitySet;
-import io.jmix.core.FluentLoader;
 import io.jmix.core.FluentValueLoader;
-import io.jmix.core.FluentValuesLoader;
 import io.jmix.core.Id;
 import io.jmix.core.LoadContext;
 import io.jmix.core.SaveContext;
-import io.jmix.core.UnconstrainedDataManager;
 import io.jmix.core.ValueLoadContext;
 import io.jmix.core.entity.KeyValueEntity;
 import org.springframework.lang.Nullable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import ru.udya.rdatamanager.fl.RFluentLoader;
+import ru.udya.rdatamanager.fl.RFluentValueLoader;
+import ru.udya.rdatamanager.fl.RFluentValuesLoader;
 
 public interface UnconstrainedRDataManager {
 
@@ -115,7 +114,7 @@ public interface UnconstrainedRDataManager {
      *
      * @param entityClass class of the loaded entity
      */
-    <E> FluentLoader<E> load(Class<E> entityClass);
+    <E> RFluentLoader<E> load(Class<E> entityClass);
 
     /**
      * Entry point to the fluent API for loading entities.
@@ -127,7 +126,7 @@ public interface UnconstrainedRDataManager {
      *
      * @param entityId {@link Id} of the loaded entity
      */
-    <E> FluentLoader.ById<E> load(Id<E> entityId);
+    <E> RFluentLoader.ById<E> load(Id<E> entityId);
 
     /**
      * Entry point to the fluent API for loading scalar values.
@@ -148,7 +147,7 @@ public interface UnconstrainedRDataManager {
      *
      * @param queryString query string
      */
-    FluentValuesLoader loadValues(String queryString);
+    RFluentValuesLoader loadValues(String queryString);
 
     /**
      * Entry point to the fluent API for loading a single scalar value.
@@ -167,7 +166,7 @@ public interface UnconstrainedRDataManager {
      * @param queryString query string
      * @param valueClass  type of the returning value
      */
-    <T> FluentValueLoader<T> loadValue(String queryString, Class<T> valueClass);
+    <T> RFluentValueLoader<T> loadValue(String queryString, Class<T> valueClass);
 
     /**
      * Creates a new entity instance in memory. This is a shortcut to {@code Metadata.create()}.

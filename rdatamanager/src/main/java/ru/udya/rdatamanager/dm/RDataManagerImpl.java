@@ -1,9 +1,7 @@
-package ru.udya.rdatamanager;
+package ru.udya.rdatamanager.dm;
 
 import io.jmix.core.AccessConstraintsRegistry;
-import io.jmix.core.UnconstrainedDataManager;
 import io.jmix.core.constraint.AccessConstraint;
-import io.jmix.core.impl.DataManagerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
